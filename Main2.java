@@ -33,9 +33,8 @@ public class Main2 {
         Stream<Person> stream3 = persons.stream();
         Comparator<Person> comparatorPersonByName = Comparator.comparing(Person::getFamily).thenComparing(Person::getName);
         List<Person> workables = stream3.filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getAge() <= (person.getSex() == Sex.MAN ? 60 : 65))
                 .filter(person -> person.getEducation() == Education.HIGHER)
-                .filter(person -> !(person.getSex() == Sex.MAN && person.getAge() > 60))
-                .filter(person -> !(person.getSex() == Sex.WOMAN && person.getAge() > 65))
                 .sorted(comparatorPersonByName)
                 .toList();
     }
